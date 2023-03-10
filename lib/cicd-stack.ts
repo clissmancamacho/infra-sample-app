@@ -8,7 +8,6 @@ import { codeToECRspec, deployToEKSspec } from '../utils/buildspecs';
 import { Construct } from 'constructs';
 import { CicdProps } from './cluster-stack';
 
-
 export class CicdStack extends cdk.Stack {
 
     constructor(scope: Construct, id: string, props: CicdProps) {

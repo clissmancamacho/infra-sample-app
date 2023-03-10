@@ -4,6 +4,7 @@ import * as eks from 'aws-cdk-lib/aws-eks';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import { PhysicalName } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
+import { KubectlLayer } from 'aws-cdk-lib/lambda-layer-kubectl';
 
 export interface EksProps extends cdk.StackProps {
   cluster: eks.Cluster
@@ -36,6 +37,7 @@ export class ClusterStack extends cdk.Stack {
         clusterName: `demoeks`,
         mastersRole: clusterAdmin,
         version: eks.KubernetesVersion.V1_24,
+        kubectlLayer: new KubectlLayer(this, 'KubectlLayer'),
         defaultCapacity: 2,
         defaultCapacityInstance: new ec2.InstanceType(props.onDemandInstanceType)
     });
